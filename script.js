@@ -6,33 +6,49 @@
 //   else return "ERROR";
 // }
 
-function operate(operator, num1, num2) {
+function operate(operator, ...numbers) {
   switch (operator) {
     case "+":
-      return addNumbers(num1, num2);
+      return addNumbers(...numbers);
     case "-":
-      return subtractNumbers(num1, num2);
+      return subtractNumbers(...numbers);
     case "*":
-      return multiplyNumbers(num1, num2);
+      return multiplyNumbers(...numbers);
     case "/":
-      return divideNumbers(num1, num2);
+      return divideNumbers(...numbers);
     default:
       return "ERROR";
   }
 }
 
-function addNumbers(num1, num2) {
-  return num1 + num2;
+function addNumbers(...numbers) {
+  let total = 0;
+  for (let num of numbers) {
+    total += num;
+  }
+  return total;
 }
 
-function subtractNumbers(num1, num2) {
-  return num1 - num2;
+function subtractNumbers(...numbers) {
+  let total = 0;
+  for (let num of numbers) {
+    total -= num;
+  }
+  return total;
 }
 
-function multiplyNumbers(num1, num2) {
-  return num1 * num2;
+function multiplyNumbers(...numbers) {
+  let total = 1;
+  for (let num of numbers) {
+    total *= num;
+  }
+  return total;
 }
 
-function divideNumbers(num1, num2) {
-  return num1 / num2;
+function divideNumbers(...numbers) {
+  let total = numbers[0];
+  for (i = 1; i < numbers.length; i++) {
+    total = total / numbers[i];
+  }
+  return total;
 }
