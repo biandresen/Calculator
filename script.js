@@ -164,5 +164,15 @@ function displayAnswer() {
     splitNumbers[0] = parseInt(splitNumbers[0]);
     splitNumbers[1] = parseInt(splitNumbers[1]);
     display.textContent = operate("-", splitNumbers[0], splitNumbers[1]);
+  } else if (operator === "*") {
+    splitNumbers = allInput.split("*");
+    splitNumbers[0] = parseInt(splitNumbers[0]);
+    splitNumbers[1] = parseInt(splitNumbers[1]);
+    display.textContent = operate("*", splitNumbers[0], splitNumbers[1]);
+  } else if (operator === "/") {
+    splitNumbers = allInput.split("/");
+    splitNumbers[0] = parseInt(splitNumbers[0]);
+    splitNumbers[1] = parseInt(splitNumbers[1]);
+    display.textContent = operate("/", splitNumbers[0], splitNumbers[1]);
   }
 }
