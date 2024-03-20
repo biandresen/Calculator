@@ -8,127 +8,129 @@ const btn6 = document.getElementById("btn6");
 const btn7 = document.getElementById("btn7");
 const btn8 = document.getElementById("btn8");
 const btn9 = document.getElementById("btn9");
-const btnClear = document.getElementById("btnClear");
 const btnPlus = document.getElementById("btn+");
 const btnSub = document.getElementById("btn-");
 const btnMulti = document.getElementById("btn*");
 const btnDivide = document.getElementById("btn/");
 const btnPeriod = document.getElementById("btn.");
 const btnEquals = document.getElementById("btn=");
+const btnClear = document.getElementById("btnClear");
 const numbersInput = document.getElementById("numbersInput");
 const display = document.getElementById("display");
-
-const buttonsAndSigns = [
-  [btn0, 0],
-  [btn1, 1],
-  [btn2, 2],
-  [btn3, 3],
-  [btn4, 4],
-  [btn5, 5],
-  [btn6, 6],
-  [btn7, 7],
-  [btn8, 8],
-  [btn9, 9],
-  [btnPeriod, "."],
-  [btnPlus, "+"],
-  [btnSub, "-"],
-  [btnMulti, "*"],
-  [btnDivide, "/"],
-];
 
 //Global variables
 let operator;
 let clearDisplay = 0;
 let clearInput = false;
 let defaultInput = "0";
-numbersInput.textContent = defaultInput;
+let operators = ["+", "-", "*", "/"];
+let sign = true;
+let dot = false;
+let total = 0;
+let num2 = 0;
+//numbersInput.textContent = defaultInput;
 
-buttonsAndSigns.forEach(([button, sign]) => {
-  addEventListeners(button, sign);
+btn0.addEventListener("click", () => {
+  inputNumber(0);
+});
+btn1.addEventListener("click", () => {
+  inputNumber(1);
+});
+btn2.addEventListener("click", () => {
+  inputNumber(2);
+});
+btn3.addEventListener("click", () => {
+  inputNumber(3);
+});
+btn4.addEventListener("click", () => {
+  inputNumber(4);
+});
+btn5.addEventListener("click", () => {
+  inputNumber(5);
+});
+btn6.addEventListener("click", () => {
+  inputNumber(6);
+});
+btn7.addEventListener("click", () => {
+  inputNumber(7);
+});
+btn8.addEventListener("click", () => {
+  inputNumber(8);
+});
+btn9.addEventListener("click", () => {
+  inputNumber(9);
+});
+btnPeriod.addEventListener("click", () => {
+  if (dot === false && sign === false) inputNumber(".");
+});
+btnPlus.addEventListener("click", () => {
+  if (sign === false) inputSign("+");
+});
+btnSub.addEventListener("click", () => {
+  if (sign === false) inputSign("-");
+});
+btnMulti.addEventListener("click", () => {
+  if (sign === false) inputSign("*");
+});
+btnDivide.addEventListener("click", () => {
+  if (sign === false) inputSign("/");
 });
 
-function addEventListeners(button, input) {
-  button.addEventListener("click", () => {
-    console.log(clearInput);
-    if (numbersInput.textContent === "0") {
-      numbersInput.textContent = "";
-    }
-    if (["+", "-", "*", "/"].includes(input)) {
-      operator = input;
-    }
-    displayInputData(input);
-  });
-}
-
-btnEquals.addEventListener("click", () => {
-  if (!["+", "-", "*", "/", "0"].includes(numbersInput.textContent)) {
-    let splitNumbers = numbersInput.textContent
-      .split(operator)
-      .map((item) => parseFloat(item));
-    display.textContent = operate(operator, ...splitNumbers);
-    numbersInput.textContent = defaultInput;
-  }
-});
+btnEquals.addEventListener("click", () => {});
 
 btnClear.addEventListener("click", () => {
+  dot = false;
   clearDisplay++;
-  numbersInput.textContent = defaultInput;
+  numbersInput.textContent = "";
   if (clearDisplay >= 2) display.textContent = "";
 });
 
-function displayInputData(input) {
-  if (clearInput === true) {
-    numbersInput.textContent = "";
-    clearInput = false;
+function inputNumber(input) {
+  if (sign === true) numbersInput.textContent = "";
+  dot = false;
+  let number = input;
+  numbersInput.textContent += number;
+  if (numbersInput.textContent.includes(".")) {
+    dot = true;
   }
-
-  numbersInput.textContent += input;
+  sign = false;
 }
 
-function operate(operator, ...numbers) {
+function inputSign(input) {
+  num2 = numbersInput.textContent;
+  sign = true;
+  operator = input;
+  numbersInput.textContent = operator;
+}
+
+function operate(num2) {
   clearDisplay = 0;
   switch (operator) {
     case "+":
-      return addNumbers(...numbers);
+      return addNumbers(num2);
     case "-":
-      return subtractNumbers(...numbers);
+      return subtractNumbers(num2);
     case "*":
-      return multiplyNumbers(...numbers);
+      return multiplyNumbers(num2);
     case "/":
-      return divideNumbers(...numbers);
+      return divideNumbers(num2);
     default:
       return "ERROR";
   }
 }
 
-function addNumbers(...numbers) {
-  let total = 0;
-  for (let num of numbers) {
-    total += num;
-  }
-  return total;
+function addNumbers(num2) {
+  total += num2;
 }
 
-function subtractNumbers(...numbers) {
-  let total = numbers[0];
-  for (i = 1; i < numbers.length; i++) {
-    total -= numbers[i];
-  }
-  return total;
+function subtractNumbers(num2) {
+  total -= num2;
 }
 
-function multiplyNumbers(...numbers) {
-  let total = 1;
-  for (let num of numbers) {
-    total *= num;
-  }
-  return total;
+function multiplyNumbers(num2) {
+  total *= num2;
 }
 
-function divideNumbers(...numbers) {
-  let total = numbers[0];
-  for (i = 1; i < numbers.length; i++) {
-    total = total / numbers[i];
-  }
-  return total;
+function divideNumbers(num2) {
+  total /= num2;
 }
