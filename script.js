@@ -122,9 +122,9 @@ function addNumbers(...numbers) {
 }
 
 function subtractNumbers(...numbers) {
-  let total = 0;
-  for (let num of numbers) {
-    total -= num;
+  let total = numbers[0];
+  for (i = 1; i < numbers.length; i++) {
+    total = total - numbers[i];
   }
   return total;
 }
@@ -151,16 +151,18 @@ function displayInputData(input) {
 }
 
 function displayAnswer() {
+  let splitNumbers = [];
+  let allInput = numbersInput.textContent;
+
   if (operator === "+") {
-    let splitNumbers = [];
-    let allInput = numbersInput.textContent;
     splitNumbers = allInput.split("+");
-    console.log(splitNumbers);
     splitNumbers[0] = parseInt(splitNumbers[0]);
     splitNumbers[1] = parseInt(splitNumbers[1]);
-    console.log(splitNumbers[0]);
-    console.log(splitNumbers[1]);
-    console.log(typeof splitNumbers[0]);
     display.textContent = operate("+", splitNumbers[0], splitNumbers[1]);
+  } else if (operator === "-") {
+    splitNumbers = allInput.split("-");
+    splitNumbers[0] = parseInt(splitNumbers[0]);
+    splitNumbers[1] = parseInt(splitNumbers[1]);
+    display.textContent = operate("-", splitNumbers[0], splitNumbers[1]);
   }
 }
