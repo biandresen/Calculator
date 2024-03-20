@@ -63,6 +63,10 @@ btn9.addEventListener("click", () => {
   displayInputData(9);
 });
 
+btnPeriod.addEventListener("click", () => {
+  displayInputData(".");
+});
+
 btnPlus.addEventListener("click", () => {
   operator = "+";
   displayInputData("+");
@@ -79,11 +83,6 @@ btnMulti.addEventListener("click", () => {
 });
 
 btnDivide.addEventListener("click", () => {
-  operator = "/";
-  displayInputData("/");
-});
-
-btnPeriod.addEventListener("click", () => {
   operator = "/";
   displayInputData("/");
 });
@@ -153,26 +152,28 @@ function displayInputData(input) {
 function displayAnswer() {
   let splitNumbers = [];
   let allInput = numbersInput.textContent;
+  console.log(allInput);
 
   if (operator === "+") {
     splitNumbers = allInput.split("+");
-    splitNumbers[0] = parseInt(splitNumbers[0]);
-    splitNumbers[1] = parseInt(splitNumbers[1]);
+    splitNumbers[0] = parseFloat(splitNumbers[0]);
+    splitNumbers[1] = parseFloat(splitNumbers[1]);
+    console.log(splitNumbers[0] + " " + splitNumbers[1]);
     display.textContent = operate("+", splitNumbers[0], splitNumbers[1]);
   } else if (operator === "-") {
     splitNumbers = allInput.split("-");
-    splitNumbers[0] = parseInt(splitNumbers[0]);
-    splitNumbers[1] = parseInt(splitNumbers[1]);
+    splitNumbers[0] = parseFloat(splitNumbers[0]);
+    splitNumbers[1] = parseFloat(splitNumbers[1]);
     display.textContent = operate("-", splitNumbers[0], splitNumbers[1]);
   } else if (operator === "*") {
     splitNumbers = allInput.split("*");
-    splitNumbers[0] = parseInt(splitNumbers[0]);
-    splitNumbers[1] = parseInt(splitNumbers[1]);
+    splitNumbers[0] = parseFloat(splitNumbers[0]);
+    splitNumbers[1] = parseFloat(splitNumbers[1]);
     display.textContent = operate("*", splitNumbers[0], splitNumbers[1]);
   } else if (operator === "/") {
     splitNumbers = allInput.split("/");
-    splitNumbers[0] = parseInt(splitNumbers[0]);
-    splitNumbers[1] = parseInt(splitNumbers[1]);
+    splitNumbers[0] = parseFloat(splitNumbers[0]);
+    splitNumbers[1] = parseFloat(splitNumbers[1]);
     display.textContent = operate("/", splitNumbers[0], splitNumbers[1]);
   }
 }
