@@ -61,7 +61,7 @@ function addEventListeners(button, input) {
 }
 
 btnEquals.addEventListener("click", () => {
-  if (numbersInput.textContent !== defaultInput) {
+  if (!["+", "-", "*", "/", "0"].includes(numbersInput.textContent)) {
     let splitNumbers = numbersInput.textContent
       .split(operator)
       .map((item) => parseFloat(item));
