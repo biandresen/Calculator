@@ -1,5 +1,6 @@
 //VARIABLE DECLARATION
 //buttons
+const btn0 = document.getElementById("btn0");
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
 const btn3 = document.getElementById("btn3");
@@ -17,13 +18,82 @@ const btnDivide = document.getElementById("btn/");
 const btnPeriod = document.getElementById("btn.");
 const btnEquals = document.getElementById("btn=");
 const numbersInput = document.getElementById("numbersInput");
+const display = document.getElementById("display");
+
+let operator;
 
 //EVENT-LISTENERS
-btnClear.addEventListener("click", () => {
-  numbersInput.textContent = "";
+btn0.addEventListener("click", () => {
+  displayInputData(0);
 });
+
 btn1.addEventListener("click", () => {
   displayInputData(1);
+});
+
+btn2.addEventListener("click", () => {
+  displayInputData(2);
+});
+
+btn3.addEventListener("click", () => {
+  displayInputData(3);
+});
+
+btn4.addEventListener("click", () => {
+  displayInputData(4);
+});
+
+btn5.addEventListener("click", () => {
+  displayInputData(5);
+});
+
+btn6.addEventListener("click", () => {
+  displayInputData(6);
+});
+
+btn7.addEventListener("click", () => {
+  displayInputData(7);
+});
+
+btn8.addEventListener("click", () => {
+  displayInputData(8);
+});
+
+btn9.addEventListener("click", () => {
+  displayInputData(9);
+});
+
+btnPlus.addEventListener("click", () => {
+  operator = "+";
+  displayInputData("+");
+});
+
+btnSub.addEventListener("click", () => {
+  operator = "-";
+  displayInputData("-");
+});
+
+btnMulti.addEventListener("click", () => {
+  operator = "*";
+  displayInputData("*");
+});
+
+btnDivide.addEventListener("click", () => {
+  operator = "/";
+  displayInputData("/");
+});
+
+btnPeriod.addEventListener("click", () => {
+  operator = "/";
+  displayInputData("/");
+});
+
+btnEquals.addEventListener("click", () => {
+  displayAnswer();
+});
+
+btnClear.addEventListener("click", () => {
+  numbersInput.textContent = "";
 });
 
 //FUNCTIONS
@@ -78,4 +148,19 @@ function divideNumbers(...numbers) {
 //misc operations
 function displayInputData(input) {
   numbersInput.textContent += input;
+}
+
+function displayAnswer() {
+  if (operator === "+") {
+    let splitNumbers = [];
+    let allInput = numbersInput.textContent;
+    splitNumbers = allInput.split("+");
+    console.log(splitNumbers);
+    splitNumbers[0] = parseInt(splitNumbers[0]);
+    splitNumbers[1] = parseInt(splitNumbers[1]);
+    console.log(splitNumbers[0]);
+    console.log(splitNumbers[1]);
+    console.log(typeof splitNumbers[0]);
+    display.textContent = operate("+", splitNumbers[0], splitNumbers[1]);
+  }
 }
