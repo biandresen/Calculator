@@ -54,7 +54,7 @@ body {
   color: gold;
   border-radius: 5px;
   border-style: ridge;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 800;
 }
 
@@ -74,7 +74,7 @@ body {
   background-color: rgb(241, 241, 241);
   border-radius: 5px;
   border-style: ridge;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 800;
 }
 
@@ -87,7 +87,7 @@ body {
   border-radius: 5px;
   background-color: rgb(72, 72, 72);
   color: gold;
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 800;
 }
 

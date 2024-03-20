@@ -40,6 +40,8 @@ const buttonsAndSigns = [
 let operator;
 let clearDisplay = 0;
 let clearInput = false;
+let defaultInput = "0";
+numbersInput.textContent = defaultInput;
 
 buttonsAndSigns.forEach(([button, sign]) => {
   addEventListeners(button, sign);
@@ -47,6 +49,10 @@ buttonsAndSigns.forEach(([button, sign]) => {
 
 function addEventListeners(button, input) {
   button.addEventListener("click", () => {
+    console.log(clearInput);
+    if (numbersInput.textContent === "0") {
+      numbersInput.textContent = "";
+    }
     if (["+", "-", "*", "/"].includes(input)) {
       operator = input;
     }
@@ -55,16 +61,18 @@ function addEventListeners(button, input) {
 }
 
 btnEquals.addEventListener("click", () => {
-  clearInput = true;
-  let splitNumbers = numbersInput.textContent
-    .split(operator)
-    .map((item) => parseFloat(item));
-  display.textContent = operate(operator, ...splitNumbers);
+  if (numbersInput.textContent !== defaultInput) {
+    let splitNumbers = numbersInput.textContent
+      .split(operator)
+      .map((item) => parseFloat(item));
+    display.textContent = operate(operator, ...splitNumbers);
+    numbersInput.textContent = defaultInput;
+  }
 });
 
 btnClear.addEventListener("click", () => {
   clearDisplay++;
-  numbersInput.textContent = "";
+  numbersInput.textContent = defaultInput;
   if (clearDisplay >= 2) display.textContent = "";
 });
 
@@ -73,6 +81,7 @@ function displayInputData(input) {
     numbersInput.textContent = "";
     clearInput = false;
   }
+
   numbersInput.textContent += input;
 }
 
