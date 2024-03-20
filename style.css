@@ -58,6 +58,19 @@ body {
   border-style: ridge;
 }
 
+#clearBtn {
+  margin: 0px 5px 0px 0px;
+  padding: 0px;
+  height: calc(0.102 * 0.65 * 100vh);
+  width: calc(0.157 * 0.65 * 100vh);
+  border-radius: 5px;
+  border-style: ridge;
+  background-color: rgb(72, 72, 72);
+  color: gold;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 #buttonsContainer {
   display: flex;
   justify-content: space-evenly;
