@@ -21,87 +21,57 @@ const numbersInput = document.getElementById("numbersInput");
 const display = document.getElementById("display");
 
 let operator;
-let clear = 0;
+let clearDisplay = 0;
+let clearInput = false;
 
 //EVENT-LISTENERS
-btn0.addEventListener("click", () => {
-  displayInputData(0);
-});
+function addEventListeners(button, input) {
+  button.addEventListener("click", () => {
+    if (input === "+" || input === "-" || input === "/" || input === "*") {
+      operator = input;
+    }
 
-btn1.addEventListener("click", () => {
-  displayInputData(1);
-});
+    displayInputData(input);
+  });
+}
 
-btn2.addEventListener("click", () => {
-  displayInputData(2);
-});
+const buttonsAndSigns = [
+  [btn0, 0],
+  [btn1, 1],
+  [btn2, 2],
+  [btn3, 3],
+  [btn4, 4],
+  [btn5, 5],
+  [btn6, 6],
+  [btn7, 7],
+  [btn8, 8],
+  [btn9, 9],
+  [btnPeriod, "."],
+  [btnPlus, "+"],
+  [btnSub, "-"],
+  [btnMulti, "*"],
+  [btnDivide, "/"],
+];
 
-btn3.addEventListener("click", () => {
-  displayInputData(3);
-});
-
-btn4.addEventListener("click", () => {
-  displayInputData(4);
-});
-
-btn5.addEventListener("click", () => {
-  displayInputData(5);
-});
-
-btn6.addEventListener("click", () => {
-  displayInputData(6);
-});
-
-btn7.addEventListener("click", () => {
-  displayInputData(7);
-});
-
-btn8.addEventListener("click", () => {
-  displayInputData(8);
-});
-
-btn9.addEventListener("click", () => {
-  displayInputData(9);
-});
-
-btnPeriod.addEventListener("click", () => {
-  displayInputData(".");
-});
-
-btnPlus.addEventListener("click", () => {
-  operator = "+";
-  displayInputData("+");
-});
-
-btnSub.addEventListener("click", () => {
-  operator = "-";
-  displayInputData("-");
-});
-
-btnMulti.addEventListener("click", () => {
-  operator = "*";
-  displayInputData("*");
-});
-
-btnDivide.addEventListener("click", () => {
-  operator = "/";
-  displayInputData("/");
+buttonsAndSigns.forEach(([button, sign]) => {
+  addEventListeners(button, sign);
 });
 
 btnEquals.addEventListener("click", () => {
+  clearInput = true;
   displayAnswer();
 });
 
 btnClear.addEventListener("click", () => {
-  clear++;
+  clearDisplay++;
   numbersInput.textContent = "";
-  if (clear >= 2) display.textContent = "";
+  if (clearDisplay >= 2) display.textContent = "";
 });
 
 //FUNCTIONS
 //math operations
 function operate(operator, ...numbers) {
-  clear = 0;
+  clearDisplay = 0;
   switch (operator) {
     case "+":
       return addNumbers(...numbers);
@@ -150,19 +120,21 @@ function divideNumbers(...numbers) {
 
 //misc operations
 function displayInputData(input) {
+  if (clearInput === true) {
+    numbersInput.textContent = "";
+    clearInput = false;
+  }
   numbersInput.textContent += input;
 }
 
 function displayAnswer() {
   let splitNumbers = [];
   let allInput = numbersInput.textContent;
-  console.log(allInput);
 
   if (operator === "+") {
     splitNumbers = allInput.split("+");
     splitNumbers[0] = parseFloat(splitNumbers[0]);
     splitNumbers[1] = parseFloat(splitNumbers[1]);
-    console.log(splitNumbers[0] + " " + splitNumbers[1]);
     display.textContent = operate("+", splitNumbers[0], splitNumbers[1]);
   } else if (operator === "-") {
     splitNumbers = allInput.split("-");
