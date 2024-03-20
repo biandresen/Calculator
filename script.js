@@ -21,6 +21,7 @@ const numbersInput = document.getElementById("numbersInput");
 const display = document.getElementById("display");
 
 let operator;
+let clear = 0;
 
 //EVENT-LISTENERS
 btn0.addEventListener("click", () => {
@@ -92,12 +93,15 @@ btnEquals.addEventListener("click", () => {
 });
 
 btnClear.addEventListener("click", () => {
+  clear++;
   numbersInput.textContent = "";
+  if (clear >= 2) display.textContent = "";
 });
 
 //FUNCTIONS
 //math operations
 function operate(operator, ...numbers) {
+  clear = 0;
   switch (operator) {
     case "+":
       return addNumbers(...numbers);
