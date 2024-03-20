@@ -1,0 +1,28 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#header,
+#footer {
+  background-color: darkslategray;
+  width: 100vw;
+  height: calc(0.1 * 100vh);
+}
+
+#content {
+  background-color: darkcyan;
+  width: 100vw;
+  height: calc(0.8 * 100vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calculatorFrame {
+  background-color: rgb(53, 53, 53);
+  width: calc(0.25 * 100vw);
+  height: calc(0.65 * 100vh);
+  border-radius: 8px;
+}
+
