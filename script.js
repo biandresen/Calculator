@@ -1,11 +1,33 @@
-// function operate(operator, num1, num2) {
-//   if (operator === "+") return addNumbers(num1, num2);
-//   else if (operator === "-") return subtractNumbers(num1, num2);
-//   else if (operator === "*") return multiplyNumbers(num1, num2);
-//   else if (operator === "/") return divideNumbers(num1, num2);
-//   else return "ERROR";
-// }
+//VARIABLE DECLARATION
+//buttons
+const btn1 = document.getElementById("btn1");
+const btn2 = document.getElementById("btn2");
+const btn3 = document.getElementById("btn3");
+const btn4 = document.getElementById("btn4");
+const btn5 = document.getElementById("btn5");
+const btn6 = document.getElementById("btn6");
+const btn7 = document.getElementById("btn7");
+const btn8 = document.getElementById("btn8");
+const btn9 = document.getElementById("btn9");
+const btnClear = document.getElementById("btnClear");
+const btnPlus = document.getElementById("btn+");
+const btnSub = document.getElementById("btn-");
+const btnMulti = document.getElementById("btn*");
+const btnDivide = document.getElementById("btn/");
+const btnPeriod = document.getElementById("btn.");
+const btnEquals = document.getElementById("btn=");
+const numbersInput = document.getElementById("numbersInput");
 
+//EVENT-LISTENERS
+btnClear.addEventListener("click", () => {
+  numbersInput.textContent = "";
+});
+btn1.addEventListener("click", () => {
+  displayInputData(1);
+});
+
+//FUNCTIONS
+//math operations
 function operate(operator, ...numbers) {
   switch (operator) {
     case "+":
@@ -51,4 +73,9 @@ function divideNumbers(...numbers) {
     total = total / numbers[i];
   }
   return total;
+}
+
+//misc operations
+function displayInputData(input) {
+  numbersInput.textContent += input;
 }
