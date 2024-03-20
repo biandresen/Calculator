@@ -1,5 +1,3 @@
-//VARIABLE DECLARATION
-//buttons
 const btn0 = document.getElementById("btn0");
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
@@ -20,21 +18,6 @@ const btnEquals = document.getElementById("btn=");
 const numbersInput = document.getElementById("numbersInput");
 const display = document.getElementById("display");
 
-let operator;
-let clearDisplay = 0;
-let clearInput = false;
-
-//EVENT-LISTENERS
-function addEventListeners(button, input) {
-  button.addEventListener("click", () => {
-    if (input === "+" || input === "-" || input === "/" || input === "*") {
-      operator = input;
-    }
-
-    displayInputData(input);
-  });
-}
-
 const buttonsAndSigns = [
   [btn0, 0],
   [btn1, 1],
@@ -53,13 +36,30 @@ const buttonsAndSigns = [
   [btnDivide, "/"],
 ];
 
+//Global variables
+let operator;
+let clearDisplay = 0;
+let clearInput = false;
+
 buttonsAndSigns.forEach(([button, sign]) => {
   addEventListeners(button, sign);
 });
 
+function addEventListeners(button, input) {
+  button.addEventListener("click", () => {
+    if (["+", "-", "*", "/"].includes(input)) {
+      operator = input;
+    }
+    displayInputData(input);
+  });
+}
+
 btnEquals.addEventListener("click", () => {
   clearInput = true;
-  displayAnswer();
+  let splitNumbers = numbersInput.textContent
+    .split(operator)
+    .map((item) => parseFloat(item));
+  display.textContent = operate(operator, ...splitNumbers);
 });
 
 btnClear.addEventListener("click", () => {
@@ -68,8 +68,14 @@ btnClear.addEventListener("click", () => {
   if (clearDisplay >= 2) display.textContent = "";
 });
 
-//FUNCTIONS
-//math operations
+function displayInputData(input) {
+  if (clearInput === true) {
+    numbersInput.textContent = "";
+    clearInput = false;
+  }
+  numbersInput.textContent += input;
+}
+
 function operate(operator, ...numbers) {
   clearDisplay = 0;
   switch (operator) {
@@ -97,7 +103,7 @@ function addNumbers(...numbers) {
 function subtractNumbers(...numbers) {
   let total = numbers[0];
   for (i = 1; i < numbers.length; i++) {
-    total = total - numbers[i];
+    total -= numbers[i];
   }
   return total;
 }
@@ -116,40 +122,4 @@ function divideNumbers(...numbers) {
     total = total / numbers[i];
   }
   return total;
-}
-
-//misc operations
-function displayInputData(input) {
-  if (clearInput === true) {
-    numbersInput.textContent = "";
-    clearInput = false;
-  }
-  numbersInput.textContent += input;
-}
-
-function displayAnswer() {
-  let splitNumbers = [];
-  let allInput = numbersInput.textContent;
-
-  if (operator === "+") {
-    splitNumbers = allInput.split("+");
-    splitNumbers[0] = parseFloat(splitNumbers[0]);
-    splitNumbers[1] = parseFloat(splitNumbers[1]);
-    display.textContent = operate("+", splitNumbers[0], splitNumbers[1]);
-  } else if (operator === "-") {
-    splitNumbers = allInput.split("-");
-    splitNumbers[0] = parseFloat(splitNumbers[0]);
-    splitNumbers[1] = parseFloat(splitNumbers[1]);
-    display.textContent = operate("-", splitNumbers[0], splitNumbers[1]);
-  } else if (operator === "*") {
-    splitNumbers = allInput.split("*");
-    splitNumbers[0] = parseFloat(splitNumbers[0]);
-    splitNumbers[1] = parseFloat(splitNumbers[1]);
-    display.textContent = operate("*", splitNumbers[0], splitNumbers[1]);
-  } else if (operator === "/") {
-    splitNumbers = allInput.split("/");
-    splitNumbers[0] = parseFloat(splitNumbers[0]);
-    splitNumbers[1] = parseFloat(splitNumbers[1]);
-    display.textContent = operate("/", splitNumbers[0], splitNumbers[1]);
-  }
 }

@@ -6,6 +6,9 @@ body {
 
 #header,
 #footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: darkslategray;
   width: 100vw;
   height: calc(0.1 * 100vh);
@@ -41,12 +44,14 @@ body {
 }
 
 #display {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 5px 12px 5px 12px;
   padding: 0px;
   height: calc(0.13 * 0.65 * 100vh);
   background-color: black;
-  color: white;
+  color: gold;
   border-radius: 5px;
   border-style: ridge;
   font-size: 30px;
@@ -58,6 +63,9 @@ body {
 
 #numbersInput {
   display: inline-block;
+  display: flex;
+  justify-content: right;
+  align-items: center;
   margin: 5px 0px 0px 5px;
   padding: 0px;
   width: calc(0.165 * 100vw);
