@@ -23,14 +23,20 @@ let operator = undefined;
 let operators = ["+", "-", "*", "/", ""];
 let sign = false;
 let dot = false;
+let equals = false;
 let previousValue = 0;
-let currentValue;
+let currentValue = 0;
 let total;
 
 function resetValues() {
+  operator = undefined;
   inputDisplay.textContent = "";
   sign = false;
   dot = false;
+  total = 0;
+  previousValue = 0;
+  currentValue = 0;
+  display.textContent = "";
 }
 
 btn0.addEventListener("click", () => {
@@ -85,6 +91,7 @@ btnDivide.addEventListener("click", () => {
 
 btnEquals.addEventListener("click", () => {
   inputDisplay.textContent = previousValue;
+  equals = true;
 });
 
 btnClear.addEventListener("click", () => {
@@ -92,6 +99,10 @@ btnClear.addEventListener("click", () => {
 });
 
 function inputNumber(input) {
+  if (equals) {
+    resetValues();
+    equals = false;
+  }
   if (operators.includes(inputDisplay.textContent))
     inputDisplay.textContent = "";
   if (sign === true) {
@@ -103,6 +114,7 @@ function inputNumber(input) {
     previousValue = parseFloat(inputDisplay.textContent);
     sign = false;
   }
+  display.textContent = previousValue;
 }
 
 function inputSign(input) {
@@ -124,14 +136,14 @@ function calculate(total, currentValue) {
       console.log("CALC -");
       break;
     case "*":
-      total = add(previousValue, currentValue);
+      total = multi(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC -");
+      console.log("CALC *");
       break;
     case "/":
       total = divide(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC -");
+      console.log("CALC /");
       break;
     default:
       inputDisplay.textContent = "ERROR";
@@ -146,11 +158,10 @@ function add(previousValue, currentValue) {
 }
 
 function sub(previousValue, currentValue) {
-  console.log("Inside sub");
   return previousValue - currentValue;
 }
 
-function add(previousValue, currentValue) {
+function multi(previousValue, currentValue) {
   return previousValue * currentValue;
 }
 
