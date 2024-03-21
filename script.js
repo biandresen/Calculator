@@ -15,20 +15,23 @@ const btnDivide = document.getElementById("btn/");
 const btnPeriod = document.getElementById("btn.");
 const btnEquals = document.getElementById("btn=");
 const btnClear = document.getElementById("btnClear");
-const numbersInput = document.getElementById("numbersInput");
+const inputDisplay = document.getElementById("numbersInput");
 const display = document.getElementById("display");
 
 //Global variables
-let operator;
-let clearDisplay = 0;
-let clearInput = false;
-let defaultInput = "0";
-let operators = ["+", "-", "*", "/"];
-let sign = true;
+let operator = undefined;
+let operators = ["+", "-", "*", "/", ""];
+let sign = false;
 let dot = false;
-let total = 0;
-let num2 = 0;
-//numbersInput.textContent = defaultInput;
+let previousValue = 0;
+let currentValue;
+let total;
+
+function resetValues() {
+  inputDisplay.textContent = "";
+  sign = false;
+  dot = false;
+}
 
 btn0.addEventListener("click", () => {
   inputNumber(0);
@@ -61,76 +64,96 @@ btn9.addEventListener("click", () => {
   inputNumber(9);
 });
 btnPeriod.addEventListener("click", () => {
-  if (dot === false && sign === false) inputNumber(".");
+  if (
+    !inputDisplay.textContent.includes(".") &&
+    !operators.includes(inputDisplay.textContent)
+  )
+    inputNumber(".");
 });
 btnPlus.addEventListener("click", () => {
-  if (sign === false) inputSign("+");
+  if (!operators.includes(inputDisplay.textContent)) inputSign("+");
 });
 btnSub.addEventListener("click", () => {
-  if (sign === false) inputSign("-");
+  if (!operators.includes(inputDisplay.textContent)) inputSign("-");
 });
 btnMulti.addEventListener("click", () => {
-  if (sign === false) inputSign("*");
+  if (!operators.includes(inputDisplay.textContent)) inputSign("*");
 });
 btnDivide.addEventListener("click", () => {
-  if (sign === false) inputSign("/");
+  if (!operators.includes(inputDisplay.textContent)) inputSign("/");
 });
 
-btnEquals.addEventListener("click", () => {});
+btnEquals.addEventListener("click", () => {
+  inputDisplay.textContent = previousValue;
+});
 
 btnClear.addEventListener("click", () => {
-  dot = false;
-  clearDisplay++;
-  numbersInput.textContent = "";
-  if (clearDisplay >= 2) display.textContent = "";
+  resetValues();
 });
 
 function inputNumber(input) {
-  if (sign === true) numbersInput.textContent = "";
-  dot = false;
-  let number = input;
-  numbersInput.textContent += number;
-  if (numbersInput.textContent.includes(".")) {
-    dot = true;
+  if (operators.includes(inputDisplay.textContent))
+    inputDisplay.textContent = "";
+  if (sign === true) {
+    inputDisplay.textContent += input;
+    currentValue = parseFloat(inputDisplay.textContent);
+    calculate(previousValue, currentValue);
+  } else {
+    inputDisplay.textContent += input;
+    previousValue = parseFloat(inputDisplay.textContent);
+    sign = false;
   }
-  sign = false;
 }
 
 function inputSign(input) {
-  num2 = numbersInput.textContent;
-  sign = true;
+  inputDisplay.textContent = input;
   operator = input;
-  numbersInput.textContent = operator;
+  sign = true;
 }
 
-function operate(num2) {
-  clearDisplay = 0;
+function calculate(total, currentValue) {
   switch (operator) {
     case "+":
-      return addNumbers(num2);
+      total = add(previousValue, currentValue);
+      previousValue = total;
+      console.log("CALC +");
+      break;
     case "-":
-      return subtractNumbers(num2);
+      total = sub(previousValue, currentValue);
+      previousValue = total;
+      console.log("CALC -");
+      break;
     case "*":
-      return multiplyNumbers(num2);
+      total = add(previousValue, currentValue);
+      previousValue = total;
+      console.log("CALC -");
+      break;
     case "/":
-      return divideNumbers(num2);
+      total = divide(previousValue, currentValue);
+      previousValue = total;
+      console.log("CALC -");
+      break;
     default:
-      return "ERROR";
+      inputDisplay.textContent = "ERROR";
+      setTimeout(() => {
+        resetValues();
+      }, 2000);
   }
 }
 
-function addNumbers(num2) {
-  total += num2;
+function add(previousValue, currentValue) {
+  return previousValue + currentValue;
 }
 
-function subtractNumbers(num2) {
-  total -= num2;
+function sub(previousValue, currentValue) {
+  console.log("Inside sub");
+  return previousValue - currentValue;
 }
 
-function multiplyNumbers(num2) {
-  total *= num2;
+function add(previousValue, currentValue) {
+  return previousValue * currentValue;
 }
 
-function divideNumbers(num2) {
-  total /= num2;
+function divide(previousValue, currentValue) {
+  return previousValue / currentValue;
 }
