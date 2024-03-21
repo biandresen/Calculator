@@ -28,17 +28,7 @@ let previousValue = 0;
 let currentValue = 0;
 let total;
 
-function resetValues() {
-  operator = undefined;
-  inputDisplay.textContent = "";
-  sign = false;
-  dot = false;
-  total = 0;
-  previousValue = 0;
-  currentValue = 0;
-  display.textContent = "";
-}
-
+//EVENT LISTENERS
 btn0.addEventListener("click", () => {
   inputNumber(0);
 });
@@ -97,7 +87,19 @@ btnEquals.addEventListener("click", () => {
 btnClear.addEventListener("click", () => {
   resetValues();
 });
+//END EVENT LISTENERS
 
+//START FUNCTIONS
+function resetValues() {
+  operator = undefined;
+  inputDisplay.textContent = "";
+  sign = false;
+  dot = false;
+  total = 0;
+  previousValue = 0;
+  currentValue = 0;
+  display.textContent = "";
+}
 function inputNumber(input) {
   if (equals) {
     resetValues();
