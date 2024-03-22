@@ -34,7 +34,6 @@ body {
 }
 
 #calculatorFrame {
-  /* background-color: rgb(53, 53, 53); */
   background: linear-gradient(to right, rgb(165, 63, 0), rgba(0, 0, 0, 0.9));
   width: calc(0.25 * 100vw);
   height: calc(0.65 * 100vh);
@@ -44,7 +43,6 @@ body {
 }
 
 #calculatorName {
-  /* background-color: rgb(72, 72, 72); */
   background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(165, 63, 0));
   color: gold;
   text-align: center;
@@ -131,7 +129,7 @@ body {
   height: 23%;
   margin: 5px 3px 3px 3px;
   padding: 0px;
-  /* background-color: rgb(72, 72, 72); */
+
   background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(165, 63, 0));
   color: gold;
   font-size: 25px;

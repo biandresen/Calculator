@@ -1,3 +1,4 @@
+//DECLARATIONS OF BUTTONS
 const btn0 = document.getElementById("btn0");
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
@@ -29,8 +30,8 @@ let currentValue = 0;
 let total;
 
 //EVENT LISTENERS
+//key listeners
 document.addEventListener("keydown", function (event) {
-  // Check if the pressed key is the Enter key (key code 13)
   if (event.key === "0") {
     if (!["0"].includes(inputDisplay.textContent)) inputNumber(0);
   } else if (event.key === "1") inputNumber(1);
@@ -57,6 +58,7 @@ document.addEventListener("keydown", function (event) {
   } else if (event.key === "Backspace") resetValues();
 });
 
+//button listeners
 btn0.addEventListener("click", () => {
   if (!["0"].includes(inputDisplay.textContent)) inputNumber(0);
 });
@@ -99,13 +101,11 @@ btnMulti.addEventListener("click", () => {
 btnDivide.addEventListener("click", () => {
   if (!operators.includes(inputDisplay.textContent)) inputSign("/");
 });
-
 btnEquals.addEventListener("click", () => {
   inputDisplay.textContent = equation.toString() + "=";
   display.textContent = eval(equation.toString());
   equals = true;
 });
-
 btnClear.addEventListener("click", () => {
   resetValues();
 });
@@ -122,33 +122,33 @@ function resetValues() {
   currentValue = 0;
   display.textContent = "";
 }
-//TAKES NUMBERS
+//takes numbers
 function inputNumber(input) {
-  //RESETS VALUES WHEN EQUALS IS CLICKED
+  //resets values when "equals" is clicked
   if (equals) {
     resetValues();
     equals = false;
   }
   equation += input.toString();
-  //RESETS INPUT DISPLAY WHEN NEW NUMBER IS INPUT
+  //resets input display for new number
   if (operators.includes(inputDisplay.textContent))
     inputDisplay.textContent = "";
-  //MAKES SURE THE SECOND NUMBER GOES INTO THE RIGHT VARIABLE (CURRENTVALUE)
+  //make sure the second number input goes into the right variable
   if (sign === true) {
     inputDisplay.textContent += input;
     currentValue = parseFloat(inputDisplay.textContent);
     calculate(previousValue, currentValue);
-    //MAKES SURE THE FIRST NUMBER GOES INTO THE RIGHT VARIABLE (PREVIOUS VALUE)
+    //make sure the first number input goes into the right variable
   } else {
     inputDisplay.textContent += input;
     previousValue = parseFloat(inputDisplay.textContent);
     sign = false;
   }
-  //DISPLAYS THE SUM CONTINUOUSLY
+  //displays sum
   display.textContent = previousValue;
 }
 
-//TAKES SIGNS (OPERATORS)
+//takes signs (operator)
 function inputSign(input) {
   inputDisplay.textContent = input;
   operator = input;
@@ -156,6 +156,7 @@ function inputSign(input) {
   equation += input;
 }
 
+//calculate decider
 function calculate(total, currentValue) {
   switch (operator) {
     case "+":
@@ -181,7 +182,7 @@ function calculate(total, currentValue) {
       }, 2000);
   }
 }
-
+//calculate functions
 function add(previousValue, currentValue) {
   return previousValue + currentValue;
 }
