@@ -4,11 +4,22 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h1 {
+  margin: 10px 0px 5px 0px;
+  padding: 10px;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
 #header,
 #footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background: linear-gradient(
     to right,
     rgba(215, 162, 0, 0.9),
