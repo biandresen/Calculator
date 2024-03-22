@@ -29,6 +29,34 @@ let currentValue = 0;
 let total;
 
 //EVENT LISTENERS
+document.addEventListener("keydown", function (event) {
+  // Check if the pressed key is the Enter key (key code 13)
+  if (event.key === "0") {
+    if (!["0"].includes(inputDisplay.textContent)) inputNumber(0);
+  } else if (event.key === "1") inputNumber(1);
+  else if (event.key === "2") inputNumber(2);
+  else if (event.key === "3") inputNumber(3);
+  else if (event.key === "4") inputNumber(4);
+  else if (event.key === "5") inputNumber(5);
+  else if (event.key === "6") inputNumber(6);
+  else if (event.key === "7") inputNumber(7);
+  else if (event.key === "8") inputNumber(8);
+  else if (event.key === "9") inputNumber(9);
+  else if (event.key === "+" && !operators.includes(inputDisplay.textContent))
+    inputSign("+");
+  else if (event.key === "-" && !operators.includes(inputDisplay.textContent))
+    inputSign("-");
+  else if (event.key === "*" && !operators.includes(inputDisplay.textContent))
+    inputSign("*");
+  else if (event.key === "/" && !operators.includes(inputDisplay.textContent))
+    inputSign("/");
+  else if (event.key === "Enter") {
+    inputDisplay.textContent = equation.toString() + "=";
+    display.textContent = eval(equation.toString());
+    equals = true;
+  } else if (event.key === "Backspace") resetValues();
+});
+
 btn0.addEventListener("click", () => {
   if (!["0"].includes(inputDisplay.textContent)) inputNumber(0);
 });
