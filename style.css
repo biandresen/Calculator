@@ -70,7 +70,6 @@ body {
   border: 2px ridge black;
   font-size: 50px;
   font-weight: 800;
-  /* text-shadow: 2px 2px 4px rgba(255, 217, 0, 0.4); */
   text-shadow: 0 0 5px rgba(255, 217, 0, 0.4), 0 0 15px rgba(255, 217, 0, 0.4),
     0 0 25px rgba(255, 217, 0, 0.4), 0 0 35px rgba(255, 217, 0, 0.4),
     0 0 45px rgba(255, 217, 0, 0.4), 0 0 55px rgba(255, 217, 0, 0.4),
@@ -126,9 +125,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: auto;
-  width: 19%;
-  height: 20%;
+  flex: 1 0 1;
+  gap: 0px;
+  width: 23%;
+  height: 23%;
   margin: 5px 3px 3px 3px;
   padding: 0px;
   /* background-color: rgb(72, 72, 72); */
@@ -137,6 +137,10 @@ body {
   font-size: 25px;
   font-weight: 800;
   border-radius: 8px;
+}
+
+.buttons.equals {
+  flex: auto;
 }
 
 .operator {

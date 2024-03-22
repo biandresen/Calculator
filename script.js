@@ -19,10 +19,10 @@ const inputDisplay = document.getElementById("numbersInput");
 const display = document.getElementById("display");
 
 //Global variables
+let equation = "";
 let operator = undefined;
 let operators = ["+", "-", "*", "/", ""];
 let sign = false;
-let dot = false;
 let equals = false;
 let previousValue = 0;
 let currentValue = 0;
@@ -30,7 +30,7 @@ let total;
 
 //EVENT LISTENERS
 btn0.addEventListener("click", () => {
-  inputNumber(0);
+  if (!["0"].includes(inputDisplay.textContent)) inputNumber(0);
 });
 btn1.addEventListener("click", () => {
   inputNumber(1);
@@ -59,13 +59,6 @@ btn8.addEventListener("click", () => {
 btn9.addEventListener("click", () => {
   inputNumber(9);
 });
-btnPeriod.addEventListener("click", () => {
-  if (
-    !inputDisplay.textContent.includes(".") &&
-    !operators.includes(inputDisplay.textContent)
-  )
-    inputNumber(".");
-});
 btnPlus.addEventListener("click", () => {
   if (!operators.includes(inputDisplay.textContent)) inputSign("+");
 });
@@ -80,7 +73,8 @@ btnDivide.addEventListener("click", () => {
 });
 
 btnEquals.addEventListener("click", () => {
-  inputDisplay.textContent = previousValue;
+  inputDisplay.textContent = equation.toString() + "=";
+  display.textContent = eval(equation.toString());
   equals = true;
 });
 
@@ -91,38 +85,47 @@ btnClear.addEventListener("click", () => {
 
 //START FUNCTIONS
 function resetValues() {
+  equation = "";
   operator = undefined;
   inputDisplay.textContent = "";
   sign = false;
-  dot = false;
   total = 0;
   previousValue = 0;
   currentValue = 0;
   display.textContent = "";
 }
+//TAKES NUMBERS
 function inputNumber(input) {
+  //RESETS VALUES WHEN EQUALS IS CLICKED
   if (equals) {
     resetValues();
     equals = false;
   }
+  equation += input.toString();
+  //RESETS INPUT DISPLAY WHEN NEW NUMBER IS INPUT
   if (operators.includes(inputDisplay.textContent))
     inputDisplay.textContent = "";
+  //MAKES SURE THE SECOND NUMBER GOES INTO THE RIGHT VARIABLE (CURRENTVALUE)
   if (sign === true) {
     inputDisplay.textContent += input;
     currentValue = parseFloat(inputDisplay.textContent);
     calculate(previousValue, currentValue);
+    //MAKES SURE THE FIRST NUMBER GOES INTO THE RIGHT VARIABLE (PREVIOUS VALUE)
   } else {
     inputDisplay.textContent += input;
     previousValue = parseFloat(inputDisplay.textContent);
     sign = false;
   }
+  //DISPLAYS THE SUM CONTINUOUSLY
   display.textContent = previousValue;
 }
 
+//TAKES SIGNS (OPERATORS)
 function inputSign(input) {
   inputDisplay.textContent = input;
   operator = input;
   sign = true;
+  equation += input;
 }
 
 function calculate(total, currentValue) {
@@ -130,22 +133,18 @@ function calculate(total, currentValue) {
     case "+":
       total = add(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC +");
       break;
     case "-":
       total = sub(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC -");
       break;
     case "*":
       total = multi(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC *");
       break;
     case "/":
       total = divide(previousValue, currentValue);
       previousValue = total;
-      console.log("CALC /");
       break;
     default:
       inputDisplay.textContent = "ERROR";
