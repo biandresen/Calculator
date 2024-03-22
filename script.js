@@ -52,8 +52,10 @@ document.addEventListener("keydown", function (event) {
   else if (event.key === "/" && !operators.includes(inputDisplay.textContent))
     inputSign("/");
   else if (event.key === "Enter") {
-    inputDisplay.textContent = equation.toString() + "=";
-    display.textContent = eval(equation.toString());
+    if (inputDisplay.textContent !== "") {
+      inputDisplay.textContent = equation.toString() + "=";
+    }
+    display.textContent = eval(equation.toString()).toFixed(2);
     equals = true;
   } else if (event.key === "Backspace") resetValues();
 });
@@ -102,8 +104,10 @@ btnDivide.addEventListener("click", () => {
   if (!operators.includes(inputDisplay.textContent)) inputSign("/");
 });
 btnEquals.addEventListener("click", () => {
-  inputDisplay.textContent = equation.toString() + "=";
-  display.textContent = eval(equation.toString());
+  if (inputDisplay.textContent !== "") {
+    inputDisplay.textContent = equation.toString() + "=";
+  }
+  display.textContent = eval(equation.toString()).toFixed(2);
   equals = true;
 });
 btnClear.addEventListener("click", () => {
@@ -196,5 +200,12 @@ function multi(previousValue, currentValue) {
 }
 
 function divide(previousValue, currentValue) {
-  return previousValue / currentValue;
+  let sum = previousValue / currentValue;
+  if (currentValue === 0) {
+    inputDisplay.textContent = "ERROR";
+    setTimeout(() => {
+      resetValues();
+    }, 2000);
+    return;
+  } else return sum;
 }
