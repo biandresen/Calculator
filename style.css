@@ -9,13 +9,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: darkslategray;
+  background: linear-gradient(
+    to right,
+    rgba(215, 162, 0, 0.9),
+    rgb(165, 63, 0),
+    rgba(0, 0, 0, 0.9)
+  );
   width: 100vw;
   height: calc(0.1 * 100vh);
 }
 
 #content {
-  background-color: darkcyan;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.9),
+    rgb(165, 63, 0),
+    rgba(215, 162, 0, 0.9)
+  );
   width: 100vw;
   height: calc(0.8 * 100vh);
   display: flex;
@@ -24,26 +34,30 @@ body {
 }
 
 #calculatorFrame {
-  background-color: rgb(53, 53, 53);
+  /* background-color: rgb(53, 53, 53); */
+  background: linear-gradient(to right, rgb(165, 63, 0), rgba(0, 0, 0, 0.9));
   width: calc(0.25 * 100vw);
   height: calc(0.65 * 100vh);
   border-radius: 8px;
-  border-style: outset;
+  border: 2px ridge black;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 #calculatorName {
-  background-color: rgb(72, 72, 72);
+  /* background-color: rgb(72, 72, 72); */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(165, 63, 0));
   color: gold;
   text-align: center;
   font-size: 30px;
   font-weight: 800;
   margin: 5px;
   padding: 5px;
-  border-style: ridge;
+  border: 2px ridge black;
   border-radius: 5px;
 }
 
 #display {
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,9 +67,14 @@ body {
   background-color: black;
   color: gold;
   border-radius: 5px;
-  border-style: ridge;
+  border: 2px ridge black;
   font-size: 50px;
   font-weight: 800;
+  /* text-shadow: 2px 2px 4px rgba(255, 217, 0, 0.4); */
+  text-shadow: 0 0 5px rgba(255, 217, 0, 0.4), 0 0 15px rgba(255, 217, 0, 0.4),
+    0 0 25px rgba(255, 217, 0, 0.4), 0 0 35px rgba(255, 217, 0, 0.4),
+    0 0 45px rgba(255, 217, 0, 0.4), 0 0 55px rgba(255, 217, 0, 0.4),
+    0 0 65px rgba(255, 217, 0, 0.4), 0 0 75px rgba(255, 217, 0, 0.4);
 }
 
 #clearAndInput {
@@ -63,6 +82,7 @@ body {
 }
 
 #numbersInput {
+  overflow: hidden;
   display: inline-block;
   display: flex;
   justify-content: right;
@@ -71,11 +91,12 @@ body {
   padding: 0px;
   width: calc(0.175 * 100vw);
   height: calc(0.115 * 0.65 * 100vh);
-  background-color: rgb(241, 241, 241);
+  background-color: rgba(241, 241, 241, 0.945);
   border-radius: 5px;
-  border-style: ridge;
+  border: 2px ridge black;
   font-size: 50px;
   font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 #btnClear {
@@ -85,7 +106,8 @@ body {
   height: calc(0.13 * 0.65 * 100vh);
   width: calc(0.157 * 0.65 * 100vh);
   border-radius: 5px;
-  background-color: rgb(72, 72, 72);
+  /* background-color: rgb(72, 72, 72); */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(165, 63, 0));
   color: gold;
   font-size: 20px;
   font-weight: 800;
@@ -109,13 +131,28 @@ body {
   height: 20%;
   margin: 5px 3px 3px 3px;
   padding: 0px;
-  background-color: rgb(72, 72, 72);
+  /* background-color: rgb(72, 72, 72); */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(165, 63, 0));
   color: gold;
   font-size: 25px;
   font-weight: 800;
   border-radius: 8px;
 }
 
+.operator {
+  color: black;
+  background: linear-gradient(
+    to right,
+    rgb(165, 63, 0),
+    rgba(215, 162, 0, 0.9)
+  );
+}
+
 .buttons:hover {
   cursor: pointer;
+}
+
+.buttons:active {
+  background: rgb(255, 255, 255, 0.9);
+  transition: background-color 0.2s ease-in;
 }
